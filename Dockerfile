@@ -1,18 +1,11 @@
 # Perus
-FROM ubuntu:trusty
-MAINTAINER latemak@gmail.com
-
-# Lisätään tarvittavat ppa:t
-RUN apt-get update && \
-	apt-get -y install software-properties-common && \
-	add-apt-repository -y ppa:ondrej/php-7.0 && \
-	apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
+FROM ubuntu:xenial
+MAINTAINER lauri@mits.fi
 
 # Asennetaan tarvittavat paketit
-RUN apt-get update && \
-    apt-get -y install git curl php7.0 php7.0-mysql php7.0-json && \
-    apt-get clean && \
-    rm -rf /var/www/html
+RUN apt update && \
+    apt -y install git curl php php7.0 php7.0-mysql php7.0-mcrypt php7.0-json && \
+    apt-get clean
 
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
